@@ -1,11 +1,14 @@
 const methods = require('methods');
 const Router = require('./router');
+const View = require('./view');
 
 const app = exports = module.exports = {};
 
 app.init = function(){
+    this.settings = {};
     this._router = new Router();
     this.usedRouter = false;
+    this.cache = {};
     Object.defineProperty(this, 'router', {
         configurable : true,
         enumerable : true,
@@ -28,3 +31,32 @@ methods.forEach(method => {
         
     }
 });
+
+// express设置属性
+app.set = function(key, value){
+    if(this.settings.hasOwnProperty(key)){
+        return this.settings[key];
+    }
+    this.settings[key] = value;
+};
+
+app.engine = function(engine){
+    this.settings['engine'] = engine;
+};
+
+app.render = function (name, options, fn) {
+
+    let cacheTemplate = this.cache[name];
+
+    let view = cacheTemplate || new View(name, {
+        root: process.cwd(),
+        viewPath: this.settings['views'],
+        engine: this.settings['engine']
+    });
+
+    if(!cacheTemplate && this.settings['view cache']){
+        this.cache[name] = view;
+    }
+
+    view.render(options, fn);
+};

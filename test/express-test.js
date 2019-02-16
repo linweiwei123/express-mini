@@ -7,23 +7,37 @@ const morgan = require('morgan');
 app.use(morgan('combined'));
 app.use(compression());
 
-app.get('/user',
-    (req, res, next) => {
-        console.log('进入了user 中间件1');
-        next('出错了');
-    },
-    (err, req, res, next) => {
-        console.log('进入了user 中间件2');
-        next(err);
-    }
-);
+// app.get('/user',
+//     (req, res, next) => {
+//         console.log('进入了user 中间件1');
+//         next('出错了');
+//     },
+//     (err, req, res, next) => {
+//         console.log('进入了user 中间件2');
+//         next(err);
+//     }
+// );
+//
+// app.post('/add', (req, res, next) => {
+//     console.log('进入了add router');
+// });
+//
+// app.use(function (req, res) {
+//     res.end('hello from minConnnect');
+// });
 
-app.post('/add', (req, res, next) => {
-    console.log('进入了add router');
-});
+app.set('views', 'views');
+app.set('view cache', true);
+app.engine('ejs');
 
-app.use(function (req, res) {
-    res.end('hello from minConnnect');
+app.get('/user', function (req, res, next) {
+    app.render('index.html', { name: 'lww'} , function (err, html) {
+        if(err){
+            console.log('模板引擎运行出错了', err);
+            return next(err);
+        }
+        res.end(html);
+    })
 });
 
 const server = http.createServer(app);
