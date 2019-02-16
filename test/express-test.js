@@ -1,4 +1,5 @@
 const http = require('http');
+const path = require('path');
 const express = require('../src/express.js');
 const app = express();
 const compression = require('compression');
@@ -25,6 +26,8 @@ app.use(compression());
 // app.use(function (req, res) {
 //     res.end('hello from minConnnect');
 // });
+
+app.static('public');
 
 app.set('views', 'views');
 app.set('view cache', true);

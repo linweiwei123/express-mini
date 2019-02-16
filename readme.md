@@ -56,3 +56,8 @@ app.get('/user', function (req, res, next) {
 ```javascript
 app.set('view cache', true);
 ```
+
+### 静态文件支持
+```javascript
+app.static('public'); // 参数为当前工作目录的对应的文件路径
+```

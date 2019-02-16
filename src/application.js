@@ -1,6 +1,7 @@
 const methods = require('methods');
 const Router = require('./router');
 const View = require('./view');
+const serveStatic = require('serve-static');
 
 const app = exports = module.exports = {};
 
@@ -59,4 +60,9 @@ app.render = function (name, options, fn) {
     }
 
     view.render(options, fn);
+};
+
+app.static = function (dir) {
+    console.log(process.cwd());
+    this.use(serveStatic(process.cwd() + '/' + dir), {});
 };

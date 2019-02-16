@@ -15,5 +15,4 @@ function createApplication(){
     return express;
 }
 
-
 module.exports = createApplication;
