@@ -1,6 +1,7 @@
 const connect = require('./connect');
 const mixin = require('merge-descriptors');
 const expressProto = require('./application');
+const res = require('./response');
 
 function createApplication(){
 
@@ -9,6 +10,8 @@ function createApplication(){
 
     // 混入express的特性
     mixin(express, expressProto, false);
+
+    express.response = { __proto__: res};
 
     // 初始化特性
     express.init();

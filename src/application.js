@@ -2,6 +2,7 @@ const methods = require('methods');
 const Router = require('./router');
 const View = require('./view');
 const serveStatic = require('serve-static');
+const  { middlewareInit } = require('./middleware');
 
 const app = exports = module.exports = {};
 
@@ -10,6 +11,7 @@ app.init = function(){
     this._router = new Router();
     this.usedRouter = false;
     this.cache = {};
+    this.use(middlewareInit(this));
     Object.defineProperty(this, 'router', {
         configurable : true,
         enumerable : true,

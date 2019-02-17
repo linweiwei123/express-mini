@@ -51,6 +51,12 @@ app.get('/user', function (req, res, next) {
     })
 });
 ```
+#### 使用res上的render方法
+```javascript
+app.get('/user', function (req, res, next) {
+    res.render('index.html', { title:'Hello,I am express-mini! ', name: 'lww'})
+});
+```
 
 #### 设置缓存
 ```javascript

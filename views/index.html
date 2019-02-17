@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        .main{
+            max-width: 750px;
+            padding: 20px;
+            margin: auto;
+        }
+
+        h1{
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+
+    </style>
 </head>
 <body>
-    <h1>标题</h1>
-    <div> <%= name %></div>
+    <div class="main">
+        <h1><%= title %></h1>
+        <div> <%= name %></div>
+    </div>
+
 </body>
 </html>

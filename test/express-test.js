@@ -34,13 +34,7 @@ app.set('view cache', true);
 app.engine('ejs');
 
 app.get('/user', function (req, res, next) {
-    app.render('index.html', { name: 'lww'} , function (err, html) {
-        if(err){
-            console.log('模板引擎运行出错了', err);
-            return next(err);
-        }
-        res.end(html);
-    })
+    res.render('index.html', { title:'Hello,I am express-mini! ', name: 'lww'})
 });
 
 const server = http.createServer(app);
